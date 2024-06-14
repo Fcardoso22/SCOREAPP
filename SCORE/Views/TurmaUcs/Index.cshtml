@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SCORE.Models.TurmaUc>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Turmas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nova Turma</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Turma
+            </th>
+            <th>
+                Unidade Curricular
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-row @(Model.LastOrDefault() == item ? "last-row" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdTurmaNavigation.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUcNavigation.Nome)
+                </td>
+                <td>
+@*                    <a asp-action="Edit" asp-controller="Turmas" asp-route-id="@item.IdUc">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.IdTurmaUc">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdTurmaUc">Delete</a>*@
+                    <a asp-controller="Campeonatos" asp-action="Index" asp-route-id="@item.IdTurma" class="btn btn-secondary">Campeonato</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        background-color: #34495e;
+    }
+
+    h1 {
+        color: #fff;
+    }
+
+    .table {
+        background-color: #fff;
+        border-radius: 10px;
+        padding-left: 5rem;
+    }
+
+    .last-row {
+        border-bottom: none;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+</style>

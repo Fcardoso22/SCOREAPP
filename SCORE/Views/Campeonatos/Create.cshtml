@@ -1,0 +1,46 @@
+﻿@model SCORE.Models.Campeonato
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Campeonato</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @* <div class="form-group">
+                <label asp-for="IdCampeonato" class="control-label"></label>
+                <input asp-for="IdCampeonato" class="form-control" />
+                <span asp-validation-for="IdCampeonato" class="text-danger"></span>
+            </div>*@
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Terminado" /> @Html.DisplayNameFor(model => model.Terminado)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTurma" class="control-label"></label>
+                <select asp-for="IdTurma" class ="form-control" asp-items="ViewBag.IdTurma"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUC" class="control-label"></label>
+                <select asp-for="IdUC" class ="form-control" asp-items="ViewBag.IdUC"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

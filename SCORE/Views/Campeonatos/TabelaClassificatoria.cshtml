@@ -1,0 +1,131 @@
+﻿@model List<TabelaClassificatoriaItem>
+
+    @{
+        ViewData["Title"] = "Tabela Classificatória";
+    }
+
+    <h1>Tabela Classificatória</h1>
+
+    <table class="table table-rounded">
+        <thead>
+            <tr>
+                <th>Posição</th>
+                <th>Número Mecanográfico</th>
+                <th>Pontuação</th>
+                <th>Próxima Jornada</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].NomeAluno</td>
+                    <td>@Model[i].Pontuacao</td>
+                    <td>A Decidir Sorteio...</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.Count >= 3) // Verifica se a lista tem pelo menos três elementos
+    {
+        <div class="podium">
+            <div class="podium-item first-place">
+                <div class="position">1º</div>
+                <div class="name">@Model[0].NomeAluno</div>
+            </div>
+            <div class="podium-item second-place">
+                <div class="position">2º</div>
+                <div class="name">@Model[1].NomeAluno</div>
+            </div>
+            <div class="podium-item third-place">
+                <div class="position">3º</div>
+                <div class="name">@Model[2].NomeAluno</div>
+            </div>
+        </div>
+    }
+
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+            .table th,
+            .table td {
+                padding: 8px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+
+            .table th {
+                background-color: #f2f2f2;
+            }
+
+        .table-rounded {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+            .table-rounded th:first-child {
+                border-top-left-radius: 10px;
+            }
+
+            .table-rounded th:last-child {
+                border-top-right-radius: 10px;
+            }
+
+            .table-rounded td:first-child {
+                border-bottom-left-radius: 10px;
+            }
+
+            .table-rounded td:last-child {
+                border-bottom-right-radius: 10px;
+            }
+
+            .table-rounded tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+        .podium {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .podium-item {
+            width: 120px;
+            text-align: center;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .position {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .name {
+            margin-top: 5px;
+        }
+
+        .first-place {
+            background-color: gold;
+            color: white;
+        }
+
+        .second-place {
+            background-color: silver;
+            color: white;
+        }
+
+        .third-place {
+            background-color: #cd7f32;
+            color: white;
+        }
+    </style>

@@ -1,0 +1,36 @@
+﻿@model List<SCORE.Models.Aluno>
+
+
+<h1>Lista de Alunos</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Inscrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aluno in Model)
+        {
+            <tr>
+                <td>@aluno.NmecanograficoAluno</td>
+                <td>@aluno.Nome</td>
+                <td>
+                   <form method="post" action="@Url.Action("InscreverAluno", "TurmaAlunos")">
+                        <input type="hidden" name="alunoId" value="@aluno.NmecanograficoAluno" />
+                        <select name="turmaId">
+                            @foreach (var turma in ViewBag.Turmas)
+                            {
+                                <option value="@turma.Value">@turma.Text</option>
+                            }
+                        </select>
+                        <button type="submit">Inscrever</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

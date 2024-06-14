@@ -1,0 +1,100 @@
+﻿@model SCORE.Models.Exercicio
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Exercise</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label">Title</label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label">Description</label>
+                <textarea asp-for="Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label">Type</label>
+                <select asp-for="Tipo" class="form-control" asp-items="Html.GetEnumSelectList<SCORE.Models.ExercicioTipo>()"></select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEntrega" class="control-label">Due Date</label>
+                <input asp-for="DataEntrega" class="form-control" />
+                <span asp-validation-for="DataEntrega" class="text-danger"></span>
+            </div>
+            <div id="dynamic-fields"></div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Definição da função no escopo global
+        window.displayFields = function () {
+            const tipo = $('#Tipo').val();
+            const container = $('#dynamic-fields');
+            container.empty(); // Limpa opções anteriores
+            if (tipo === 'Options') {
+                container.append(`
+                                    <div class="form-group">
+                                        <button type="button" id="add-opcao" class="btn btn-secondary">Add Option</button>
+                                    </div>
+                                    <div id="opcoes-container"></div>
+                                `);
+                var opcaoIndex = 0;
+                $("#add-opcao").click(function () {
+                    var newOpcao = `<div class="form-group">
+                                        <label for="opcao-texto" class="control-label">Option</label>
+                                        <input type="text" name="opcoes[${opcaoIndex}].Texto" class="form-control" />
+                                        <label for="opcao-correta" class="control-label">Correct</label>
+                                        <input type="checkbox" name="opcoes[${opcaoIndex}].Correta" class="form-check-input" />
+                                    </div>`;
+                    $('#opcoes-container').append(newOpcao);
+                    opcaoIndex++;
+                });
+            } else if (tipo === 'OpenResponse') {
+                container.append(`
+                                    <div class="form-group">
+                                        <label asp-for="Pergunta" class="control-label">Question</label>
+                                        <input asp-for="Pergunta" class="form-control" />
+                                        <span asp-validation-for="Pergunta" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Resposta" class="control-label">Answer</label>
+                                        <input asp-for="Resposta" class="form-control" />
+                                        <span asp-validation-for="Resposta" class="text-danger"></span>
+                                    </div>
+                                `);
+            } else if (tipo === 'FileSubmission') {
+                container.append(`
+                                    <div class="form-group">
+                                        <label for="file-upload" class="control-label">Upload File</label>
+                                        <input type="file" name="file-upload" class="form-control-file" />
+                                    </div>
+                                `);
+            }
+        }
+
+        // Vinculação do evento change ao carregar a página
+        $(document).ready(function () {
+            $('#Tipo').change(displayFields);
+            displayFields(); // Chamada inicial para configurar os campos corretos
+        });
+    </script>
+}

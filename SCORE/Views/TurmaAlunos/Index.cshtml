@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SCORE.Models.TurmaAluno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTurmaNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NmecanograficoAlunoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTurmaNavigation.IdTurma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NmecanograficoAlunoNavigation.NmecanograficoAluno)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdTurmaAluno">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdTurmaAluno">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTurmaAluno">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            background-color: blue;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .paginainicial {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .texto-adicional {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .conteudo-adicional {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .rodape {
+            background-color: #34495e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contatos {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .contatos li {
+                display: inline;
+                margin-right: 10px;
+            }
+
+                .contatos li a {
+                    color: white;
+                    text-decoration: none;
+                }
+
+        .saber-mais-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .paragrafo {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="main">
+    <div class="paginainicial">
+        <h1>SCORE</h1>
+        <h2>SUPERA AS TUAS EXPECTATIVAS E OS TEUS ADVERSÁRIOS</h2>
+        <button id="saberMaisButton" class="saber-mais-button">Saber mais</button>
+    </div>
+
+    <div class="texto-adicional">
+        <p class="paragrafo">
+            O Projeto SCORE consiste no desenvolvimento de um programa com o objetivo de colmatar as
+            dificuldades sentidas pelos alunos, sobretudo os alunos que frequentam o primeiro ano do
+            ensino superior, em acompanhar as atividades letivas de Unidades Curriculares (UC) que
+            incluem conteúdos mais exigentes ou menos atrativos.
+        </p>
+    </div>
+
+    <div class="conteudo-adicional">
+        <footer class="rodape">
+            <ul class="contatos">
+                <li><a href="https://www.utad.pt/" target="_blank">Website da UTAD</a></li>
+                <li><a href="https://pt-pt.facebook.com/UTAD.oficial/" target="_blank">Facebook da UTAD</a></li>
+                <li><a href="https://pt.linkedin.com/school/utad/" target="_blank">LinkedIn da UTAD</a></li>
+            </ul>
+        </footer>
+    </div>
+
+    <script>
+        var saberMaisButton = document.getElementById("saberMaisButton");
+        var textoAdicional = document.querySelector(".texto-adicional");
+
+        saberMaisButton.addEventListener("click", function () {
+            textoAdicional.style.display = "block";
+            window.scrollTo({
+                top: textoAdicional.offsetTop,
+                behavior: "smooth"
+            });
+        });
+    </script>
+</body>
+
+</html>

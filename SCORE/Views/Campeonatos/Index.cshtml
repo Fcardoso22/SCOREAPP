@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SCORE.Models.Campeonato>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<a asp-action="Create" class="btn btn-primary">Novo Campeonato</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Unidade Curricular
+            </th>
+            <th>
+                Turma
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Terminado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr class="table-row @(Model.LastOrDefault() == item ? "last-row" : "")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUcNavigation.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdTurmaNavigation.IdTurma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Terminado)
+                </td>
+            <td>
+               @* <a asp-action="Details" asp-route-id="@item.IdCampeonato">Details</a> |*@
+                     <a asp-action="Edit" asp-route-id="@item.IdCampeonato" class="btn btn-secondary">Edit</a>
+                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdCampeonato">Delete</a>
+                    <a asp-action="TabelaClassificatoria" class="btn btn-secondary">Classificação</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,108 @@
+﻿@model List<SCORE.Models.AlunoCampeonato>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Tabela Classificatória</h1>
+
+<script>
+// Função para obter os dados dos alunos
+function obterDadosAlunos() {
+  // Aqui você pode fazer uma requisição AJAX para obter os dados dos alunos do servidor
+  // ou pode usar um array de objetos pré-definidos como exemplo abaixo
+  return [
+    { numeroMecanografico: "ALU001", pontuacao: 0 },
+    { numeroMecanografico: "ALU002", pontuacao: 0 },
+    { numeroMecanografico: "ALU003", pontuacao: 0 },
+    // Adicione mais objetos conforme necessário
+  ];
+}
+
+// Função para preencher a tabela com os dados dos alunos
+function preencherTabelaClassificatoria() {
+  var tabela = document.getElementById("tabela-classificatoria");
+  var tbody = tabela.getElementsByTagName("tbody")[0];
+
+  var dadosAlunos = obterDadosAlunos();
+
+  // Limpar o corpo da tabela
+  tbody.innerHTML = "";
+
+  // Preencher a tabela com os dados dos alunos
+  for (var i = 0; i < dadosAlunos.length; i++) {
+    var aluno = dadosAlunos[i];
+
+    var tr = document.createElement("tr");
+
+    var tdNumeroMecanografico = document.createElement("td");
+    tdNumeroMecanografico.textContent = aluno.numeroMecanografico;
+
+    var tdPontuacao = document.createElement("td");
+    tdPontuacao.textContent = aluno.pontuacao;
+
+    tr.appendChild(tdNumeroMecanografico);
+    tr.appendChild(tdPontuacao);
+
+    tbody.appendChild(tr);
+  }
+}
+
+// Chamar a função para preencher a tabela ao carregar a página
+preencherTabelaClassificatoria();
+</script>
+
+
+@*<table>
+    <thead>
+        <tr>
+            <th>Número Mecanográfico</th>
+            <th>Pontuação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alunoCampeonato in Model)
+        {
+            <tr>
+                <td>@alunoCampeonato.NmecanograficoAlunoNavigation.NmecanograficoAluno</td>
+                <td>0</td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+
+
+
+
+
+
+@*<div>
+    <h4>Campeonato</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Terminado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Terminado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTurmaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdTurmaNavigation.IdTurma)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdUcNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdUcNavigation.IdUc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdCampeonato">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+*@

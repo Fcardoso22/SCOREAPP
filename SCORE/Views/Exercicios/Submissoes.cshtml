@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SCORE.Models.FileViewModel>
+
+@{
+    ViewData["Title"] = "Submissions";
+}
+
+<h1>Submissions</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Nota
+            </th>
+            <th>
+                Utilizador
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <input type="number" value="@item.Nota" id="nota-@item.Name" />
+                </td>
+                <td>@item.Utilizador</td>
+                <td>
+                    <button class="btn btn-primary updateNota" data-file="@item.Name">Update Nota</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.updateNota').click(function () {
+                var fileName = $(this).data('file');
+                var nota = $('#nota-' + fileName).val();
+                var url = '@Url.Action("AtualizarNota", "Exercicios")';
+                $.post(url, { nomeArquivo: fileName, nota: nota }, function (data) {
+                    alert('Nota updated successfully.');
+                });
+            });
+        });
+    </script>
+}

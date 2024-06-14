@@ -1,0 +1,63 @@
+﻿@model SCORE.Models.Exercicio
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Exercicio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <select asp-for="Tipo" class="form-control" asp-items="Html.GetEnumSelectList<SCORE.Models.ExercicioTipo>()"></select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEntrega" class="control-label"></label>
+                <input asp-for="DataEntrega" class="form-control" />
+                <span asp-validation-for="DataEntrega" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Opções</label>
+                <div id="opcoes-container">
+                    @for (int i = 0; i < Model.Opcoes.Count; i++)
+                    {
+                        <div class="opcao-item">
+                            <input type="hidden" name="opcoes[@i]" value="@Model.Opcoes.ElementAt(i).Texto" />
+                            <input type="checkbox" name="corretas[@i]" @(Model.Opcoes.ElementAt(i).Correta ? "checked" : "") />
+                            @Model.Opcoes.ElementAt(i).Texto
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
